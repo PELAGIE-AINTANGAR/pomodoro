@@ -1,0 +1,43 @@
+body {
+    text-align: center;
+    font-family: sans-serif;
+    padding: 20px;
+    background-color: #1e1e1e;
+    color: white;
+  }
+  h1, h2 { margin: 10px; }
+  button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+  }
+  button:hover {
+    background-color: #444;
+    color: white;
+  }
+  @media (max-width: 400px) {
+    h2 { font-size: 32px; }
+    button { font-size: 14px; }
+  }
+  
+  nav {
+    margin-bottom: 20px;
+  }
+  nav button {
+    background-color: #333;
+    color: white;
+  }
+  #history-list {
+    text-align: left;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+  }
+  #history-list li {
+    padding: 10px;
+    border-bottom: 1px solid #666;
+  }
+  

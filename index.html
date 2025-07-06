@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomodoro Timer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <button onclick="showView('login')">🔐 Connexion</button>
+    <button onclick="showView('register')">📝 Inscription</button>
+    <div id="private-nav" style="display: none;">
+
+      <button onclick="showView('pomodoro')">🍅 Pomodoro</button>
+      <button onclick="showView('history')">📊 Historique</button>
+      <button onclick="logout()">🚪 Déconnexion</button>
+    </div>
+  </nav>
+
+  <!-- Vue Connexion -->
+  <section id="login-view" style="display: none;">
+    <h1>Connexion</h1>
+    <form id="login-form">
+      <label>Email : <input type="email" id="login-email" required /></label><br/>
+      <label>Mot de passe : <input type="password" id="login-password" required /></label><br/>
+      <button type="submit">Se connecter</button>
+    </form>
+    <p id="login-message"></p>
+  </section>
+
+  <!-- Vue Inscription -->
+  <section id="register-view" style="display: none;">
+    <h1>Inscription</h1>
+    <form id="register-form">
+      <label>Email : <input type="email" id="register-email" required /></label><br/>
+      <label>Mot de passe : <input type="password" id="register-password" required /></label><br/>
+      <button type="submit">Créer un compte</button>
+    </form>
+    <p id="register-message"></p>
+  </section>
+
+  <!-- Vue Pomodoro -->
+  <section id="pomodoro-view" style="display: none;">
+    <h1 id="session-type">Session de travail</h1>
+    <h2 id="timer">25:00</h2>
+
+    <div class="buttons">
+      <button onclick="startTimer()">Démarrer</button>
+      <button onclick="pauseTimer()">Pause</button>
+      <button onclick="resumeTimer()">Reprendre</button>
+      <button onclick="stopTimer()">Réinitialiser</button>
+    </div>
+
+    <!-- Paramètres utilisateur -->
+    <div class="settings">
+      <h3>Paramètres</h3>
+      <label>Travail (min) : <input id="work-duration" type="number" value="25" min="1" /></label><br/>
+      <label>Pause courte (min) : <input id="short-break" type="number" value="5" min="1" /></label><br/>
+      <label>Pause longue (min) : <input id="long-break" type="number" value="15" min="1" /></label><br/>
+      <label>Son de fin : <input type="checkbox" id="sound-toggle" checked /></label>
+    </div>
+  </section>
+
+  <!-- Vue Historique -->
+  <section id="history-view" style="display: none;">
+    <h1>Historique des sessions</h1>
+    <ul id="history-list"></ul>
+  </section>
+
+  <script src="renderer.js" defer></script>
+</body>
+</html>

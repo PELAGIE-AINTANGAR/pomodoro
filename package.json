@@ -1,0 +1,25 @@
+{
+  "name": "pomodoro_devops",
+  "version": "1.0.0",
+  "description": "Pomodoro Timer Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pomodoro",
+    "productivity",
+    "electron"
+  ],
+  "author": "TonNom",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^35.2.1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.50.2",
+    "active-win": "^8.2.1"
+  }
+}
