@@ -116,18 +116,25 @@ async function logout() {
 
 // 🔍 Initialisation à l'ouverture
 (async () => {
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session }, error } = await supabase.auth.getSession();
 
-  if (session && session.user) {
-    currentUser = session.user;
-    updateNav();         
-    showView('pomodoro'); 
+  if (error) {
+    console.error("❌ Erreur récupération session Supabase :", error);
+  }
+
+  if (session && user) {
+    const { data: { user } } = await supabase.auth.getUser();
+    currentUser = user;
+    console.log("✅ Utilisateur connecté :", currentUser);
+    updateNav();
+    showView('pomodoro');
   } else {
     currentUser = null;
-    updateNav();         
-    showView('login');   
+    // updateNav();
+    showView('login');
   }
 })();
+
 
 
 // 🕒 Timer Pomodoro
@@ -167,6 +174,10 @@ function startTimer() {
     } else {
       clearInterval(timer);
       playSound();
+      // Affiche une notification de fin de session
+      new Notification(isWorking ? 'Session de travail terminée' : 'Pause terminée', {
+        body: isWorking ? `Bien joué ! Tu as travaillé pendant ${work} minutes 🎉` : `Ta pause de ${isWorking ? short : long} minutes est terminée, reprends le travail !`,
+      });
 
       if (isWorking) {
         cycleCount++;
@@ -182,11 +193,19 @@ function startTimer() {
 function pauseTimer() {
   clearInterval(timer);
   paused = true;
+  // Affiche une notification de pause
+  new Notification('Pause activée', {
+    body: 'Le timer est en pause. Reprends quand tu es prêt !',
+  });
+ 
 }
 
 function resumeTimer() {
   if (!paused) return;
   paused = false;
+  new Notification('Reprise de la session', {
+    body: isWorking ? "C’est reparti pour le travail 💼" : "La pause continue 😌"
+  });
   timer = setInterval(() => {
     if (timeLeft > 0) {
       timeLeft--;
@@ -252,6 +271,7 @@ async function loadHistory() {
   });
 }
 function isAuthenticated() {
+  console.log("🧪 Vérif auth :", !!currentUser, currentUser);
   return !!currentUser;
 }
 
