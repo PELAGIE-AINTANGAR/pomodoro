@@ -10,7 +10,7 @@ let cycleCount = 0;
 let paused = false;
 let currentUser = null;
 
-// 🔁 Récupère les durées depuis les inputs
+// Récupère les durées depuis les inputs
 function getDurations() {
   return {
     work: parseInt(document.getElementById("work-duration")?.value) || 25,
@@ -30,7 +30,7 @@ function updateNav() {
   if (historyView) historyView.style.display = loggedIn ? 'block' : 'none';
 }
 
-// 🔊 Joue le bip sonore si activé                      
+// Joue le bip sonore si activé                      
 function playSound() {
   if (document.getElementById('sound-toggle')?.checked) {
     const audio = new Audio('bip.mp3');
@@ -59,7 +59,7 @@ function showView(view) {
 }
 
 
-// 👤 Inscription
+// Inscription
 document.getElementById('register-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const email = document.getElementById('register-email').value;
@@ -137,7 +137,7 @@ async function logout() {
 
 
 
-// 🕒 Timer Pomodoro
+// Timer Pomodoro
 function updateDisplay() {
   const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
   const seconds = String(timeLeft % 60).padStart(2, '0');
@@ -275,7 +275,7 @@ function isAuthenticated() {
   return !!currentUser;
 }
 
-// 📤 Envoi à Supabase
+// Envoi à Supabase
 async function saveToSupabase(durationInMinutes) {
   if (!currentUser || !currentUser.id) {
     console.warn("Aucun utilisateur connecté. Session non sauvegardée.");
@@ -285,7 +285,7 @@ async function saveToSupabase(durationInMinutes) {
   const newSession = {
     duration: durationInMinutes,
     user_id: currentUser.id,
-    date: new Date().toISOString(), // ← très important si le champ 'date' est requis
+    date: new Date().toISOString(), 
   };
 
   const { data, error } = await supabase

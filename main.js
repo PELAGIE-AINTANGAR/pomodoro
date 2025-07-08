@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
-let mainWindow; // On déclare d'abord la variable
+let mainWindow; 
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -13,10 +13,9 @@ function createWindow() {
     }
   });
 
-  // Charge ton index.html
+  // Charge index.html
   mainWindow.loadFile('index.html');
 
-  // ✅ Active les outils de dev une fois que la fenêtre est prête
   mainWindow.webContents.once('did-finish-load', () => {
     mainWindow.webContents.openDevTools();
   });
